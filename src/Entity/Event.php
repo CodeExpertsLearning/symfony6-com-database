@@ -31,7 +31,7 @@ class Event
     private ?\DateTimeInterface $startDate = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?string $endDate = null;
+    private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -104,12 +104,12 @@ class Event
         return $this;
     }
 
-    public function getEndDate(): ?string
+    public function getEndDate(): ?\DateTimeInterface
     {
         return $this->endDate;
     }
 
-    public function setEndDate(string $endDate): self
+    public function setEndDate(\DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
 
