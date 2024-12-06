@@ -5,6 +5,7 @@ namespace App\Factory;
 use App\Entity\Event;
 use App\Repository\EventRepository;
 use Zenstruck\Foundry\ModelFactory;
+use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
 
@@ -27,24 +28,21 @@ use Zenstruck\Foundry\RepositoryProxy;
  * @method static Event[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method static Event[]|Proxy[] randomSet(int $number, array $attributes = [])
  */
-final class EventFactory extends ModelFactory
+final class EventFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
      *
      * @todo inject services if required
      */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    public function __construct() {}
 
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
      *
      * @todo add your default values here
      */
-    protected function getDefaults(): array
+    protected function defaults(): array|callable
     {
         return [
             'body' => self::faker()->text(),
@@ -68,7 +66,7 @@ final class EventFactory extends ModelFactory
         ;
     }
 
-    protected static function getClass(): string
+    public static function class(): string
     {
         return Event::class;
     }
