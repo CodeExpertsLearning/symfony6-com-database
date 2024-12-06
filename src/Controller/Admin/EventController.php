@@ -41,14 +41,9 @@ class EventController extends AbstractController
         $event->setTitle($data['title']);
         $event->setDescription($data['description']);
         $event->setBody($data['body']);
-        $event->setSlug($data['slug']);
 
         $event->setStartDate(DateTime::createFromFormat('d/m/Y H:i:s', $data['start_date']));
         $event->setEndDate(DateTime::createFromFormat('d/m/Y H:i:s', $data['end_date']));
-
-        $event->setCreatedAt(new DateTimeImmutable('now', $timezone));
-        $event->setUpdatedAt(new DateTimeImmutable('now', $timezone));
-
 
         $manager->persist($event);
         $manager->flush();
@@ -81,12 +76,9 @@ class EventController extends AbstractController
         $event->setTitle($data['title']);
         $event->setDescription($data['description']);
         $event->setBody($data['body']);
-        $event->setSlug($data['slug']);
 
         $event->setStartDate(DateTime::createFromFormat('d/m/Y H:i:s', $data['start_date']));
         $event->setEndDate(DateTime::createFromFormat('d/m/Y H:i:s', $data['end_date']));
-
-        $event->setUpdatedAt(new DateTimeImmutable('now', $timezone));
 
         $manager->flush();
 

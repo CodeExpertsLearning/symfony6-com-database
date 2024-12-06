@@ -5,11 +5,15 @@ namespace App\Entity;
 use App\Repository\EventRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 #[ORM\Table(name: 'events')]
 class Event
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -25,6 +29,7 @@ class Event
     private ?string $body = null;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Slug(fields: ['title'])]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -32,12 +37,6 @@ class Event
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $endDate = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -112,30 +111,6 @@ class Event
     public function setEndDate(\DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }
